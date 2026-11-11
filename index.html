@@ -2,75 +2,186 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Reciprocal Knowledge Library</title>
-<meta name="description" content="The library of Jeff Kisling's writing: channels into knowledge, reciprocity and extraction, Quakers and Indigenous peoples. Every blog post since 2015, searchable, with full text.">
+<meta name="description" content="Browse, search and export Jeff Kisling's writing: channels into knowledge, reciprocity and extraction, Quakers and Indigenous peoples.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#e8f3fc;--panel:#fff;--ink:#0a2038;--soft:#35506b;--accent:#0a56a6;--accent-ink:#fff;--line:#9cc4e8;--tint:#d3e8fa;--warn:#8a4b00}
+/* The Journal Research Desk's theme: cool paper, prairie green, one light mode. */
+:root{
+  --paper:#f7f9f8;
+  --card:#ffffff;
+  --mist:#eaf1ef;
+  --line:#d8e2df;
+  --ink:#000000;
+  --ink-2:#000000;
+  --ink-3:#2b2b2b;
+  --accent:#2f6b5e;
+  --accent-2:#e3efe9;
+  --sky:#e6eef6;
+  --mark:#fbeeb8;
+  --font-ui:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:10px;
+  --shadow:0 1px 2px rgba(29,42,44,.06),0 4px 14px rgba(29,42,44,.05);
+  color-scheme:light;
+}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,"Segoe UI",Arial,sans-serif}
-a{color:var(--accent)}
-header{background:var(--accent);color:var(--accent-ink);padding:18px 16px}
-header .in{max-width:1180px;margin:0 auto}
-header h1{margin:0;font-size:1.6rem;font-weight:700;letter-spacing:-.01em}
-header p{margin:6px 0 0;max-width:70ch}
-header a{color:#fff}
-.wrap{max-width:1180px;margin:0 auto;padding:16px;display:grid;grid-template-columns:290px 1fr;gap:20px}
-nav{align-self:start;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:2px solid var(--line);border-radius:10px;padding:10px}
-nav h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);margin:12px 8px 4px}
-nav button{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;border:0;background:none;font:inherit;color:var(--ink);padding:7px 8px;border-radius:6px;cursor:pointer}
-nav button:hover{background:var(--tint)}
-nav button[aria-current="true"]{background:var(--accent);color:#fff;font-weight:600}
-nav button .n{font-variant-numeric:tabular-nums;opacity:.8;font-size:.86rem}
-nav .sub{padding-left:18px}
-main{min-width:0}
-.bar{display:flex;flex-wrap:wrap;gap:8px;background:var(--panel);border:2px solid var(--line);border-radius:10px;padding:10px}
-.bar input[type=search]{flex:1 1 240px;min-width:0;font:inherit;padding:9px 11px;border:2px solid var(--accent);border-radius:8px;color:var(--ink)}
-.bar select{font:inherit;padding:8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%}
-.bar label{display:flex;align-items:center;gap:6px;font-size:.92rem}
-.about{margin:14px 2px 6px}
-.about h2{margin:0 0 2px;font-size:1.3rem}
-.about p{margin:0;color:var(--soft);max-width:75ch}
-.count{margin:8px 2px;font-weight:600}
-ul.posts{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-ul.posts li{background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:8px;padding:10px 12px}
-ul.posts a.t{font-weight:600;font-size:1.06rem;text-decoration:none}
-ul.posts a.t:hover{text-decoration:underline}
-.meta{font-size:.86rem;color:var(--soft)}
-.sum{margin:4px 0 0;overflow-wrap:anywhere}
-.chip{display:inline-block;background:var(--tint);border-radius:99px;padding:1px 9px;font-size:.8rem;margin:4px 4px 0 0;color:var(--ink)}
-.chip.w{background:#ffe9c7;color:var(--warn)}
-.more{margin:14px 0;padding:10px 18px;font:inherit;font-weight:600;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
-article{background:var(--panel);border:2px solid var(--line);border-radius:10px;padding:20px;overflow-wrap:anywhere}
-article h1{font-size:1.7rem;line-height:1.2;margin:.2em 0}
-article img{max-width:100%;height:auto}
-article blockquote{margin:1em 0;padding:.2em 1em;border-left:5px solid var(--line);background:var(--bg)}
-article .body{max-width:72ch}
-.back{font:inherit;border:2px solid var(--accent);background:#fff;color:var(--accent);border-radius:8px;padding:6px 12px;cursor:pointer;font-weight:600}
-.note{background:#fff7e6;border:1px solid #e0b25c;border-radius:8px;padding:10px 12px;margin:10px 0}
-@media (max-width:820px){.wrap{grid-template-columns:1fr}nav{position:static;max-height:none}}
+html,body{background:var(--paper);color:var(--ink)}
+body{margin:0;font:16px/1.55 var(--font-ui);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #7fb3a5;outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,3vw,32px)}
+
+header.top{background:var(--card);border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-block:22px 14px}
+.brand h1{margin:0;font:600 clamp(1.5rem,3vw,2rem)/1.15 var(--font-ui);letter-spacing:-.01em;text-wrap:balance}
+.brand p{margin:4px 0 0;color:var(--ink-2);font-size:.95rem;max-width:68ch}
+.stats{display:flex;gap:18px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.stat b{display:block;font:600 1.15rem/1.1 var(--font-ui)}
+.stat span{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+
+nav.tabs{overflow:hidden;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--card);border-bottom:1px solid var(--line)}
+.tablist{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.tablist::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:none;padding:12px 14px 11px;font-weight:600;color:var(--ink-2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;flex:none}
+.tab:hover{color:var(--accent)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.count-pill{min-width:22px;padding:1px 7px;border-radius:999px;background:var(--mist);color:var(--ink-2);font-size:.75rem;font-variant-numeric:tabular-nums;text-align:center}
+.tab[aria-selected="true"] .count-pill{background:var(--accent);color:#fff}
+
+main{padding-block:24px 56px}
+h2.ph{font:600 1.35rem/1.2 var(--font-ui);margin:0 0 4px}
+.lede{color:var(--ink-2);margin:0 0 18px;max-width:68ch}
+.hint{font-size:.8rem;color:var(--ink-3);margin:0}
+.search-hint{margin:-6px 0 12px}
+
+.searchbar{display:flex;gap:8px;margin-bottom:14px}
+.searchbar .input{font-size:1.05rem;padding:12px 14px}
+.input,.select{width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:9px 11px}
+.input:focus,.select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-2)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 13px;font-weight:600;font-size:.9rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{background:var(--mist)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#285c51}
+.btn.ghost{border-color:transparent;background:none;color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+.search-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:860px){.search-grid{grid-template-columns:minmax(0,1fr)}}
+.filters{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.filters-body{display:grid;gap:12px}
+.filters summary{display:none}
+@media (max-width:860px){.filters{padding:0}.filters summary{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-weight:600;cursor:pointer;list-style:none}.filters summary::-webkit-details-marker{display:none}.filters summary::after{content:"Show";color:var(--accent);font-size:.88rem}.filters details[open] summary::after{content:"Hide"}.filters-body{padding:0 16px 16px}}
+@media (min-width:861px){.filters{position:sticky;top:64px;max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}}
+.field{display:grid;gap:6px}
+.label{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.seclist{display:grid;gap:1px}
+.check{display:flex;align-items:center;gap:8px;font-size:.92rem;padding:5px 7px;border-radius:6px;cursor:pointer;width:100%;text-align:left;border:0;background:none;color:inherit}
+.check:hover{background:var(--mist)}
+.check[aria-current="true"]{background:var(--accent);color:#fff;font-weight:600}
+.check .n{margin-left:auto;font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--ink-3)}
+.check[aria-current="true"] .n{color:#e6f0ec}
+.check.sub{padding-left:20px}
+.check input{accent-color:var(--accent);width:16px;height:16px;flex:none}
+.subhead{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:8px 0 1px 7px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:12px}
+.toolbar .summary{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.toolbar .summary b{color:var(--ink)}
+
+.results{display:grid;gap:10px}
+.result{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.result.is-selected{background:var(--sky);border-color:#bfd1e2}
+.result .pick{padding-top:4px}
+.result .pick input{accent-color:var(--accent);width:18px;height:18px;cursor:pointer}
+.result h3{margin:0;font:700 1.08rem/1.35 var(--font-ui)}
+.result h3 a{color:var(--ink);text-decoration:none}
+.result h3 a:hover{color:var(--accent);text-decoration:underline}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.82rem;color:var(--ink-3);margin-top:3px;font-variant-numeric:tabular-nums}
+.blog-tag{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2);font-weight:600}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.result h3,.result .sum,.chip{overflow-wrap:anywhere}
+.result .sum{grid-column:2;margin:6px 0 0;font:400 1rem/1.6 var(--font-ui);max-width:120ch}
+.result .sum.empty{font:italic .92rem/1.5 var(--font-ui);color:var(--ink-3)}
+.tags{grid-column:2;display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tagbtn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:1px 9px;font-size:.76rem;color:var(--ink-2);cursor:pointer}
+.tagbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tagbtn.sec{background:var(--accent-2);border-color:#bcd8cd}
+.agebadge{display:inline-block;padding:0 8px;border-radius:999px;background:#e6eef6;border:1px solid #bfd1e2;color:#000;font-weight:600;font-size:.76rem}
+.agebadge.none{background:var(--mist);border-color:var(--line)}
+.themes{grid-column:2;font-size:.82rem;margin-top:6px}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
+.empty-state{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center;color:var(--ink-2)}
+.pager{display:flex;justify-content:center;margin-top:20px}
+
+/* Reader */
+article.post{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;overflow-wrap:anywhere;box-shadow:var(--shadow)}
+article.post h1{font:600 1.7rem/1.22 var(--font-ui);margin:.2em 0}
+article.post .body{max-width:72ch;font-size:1.02rem}
+article.post img{max-width:100%;height:auto;border-radius:6px}
+article.post blockquote{margin:1em 0;padding:.2em 1em;border-left:4px solid var(--line);background:var(--paper)}
+.note{background:#fbf3e3;border:1px solid #e3cf9e;border-radius:8px;padding:10px 12px;margin:10px 0}
+
+/* Selected & export */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 14px}
+.card h3{margin:0 0 10px;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+ul.picked{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:340px;overflow:auto}
+ul.picked li{display:flex;gap:10px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding:6px 2px}
+ul.picked .x{border:0;background:none;color:var(--accent);cursor:pointer;font-size:1.25rem;line-height:1;padding:0 4px}
+.opts{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:10px}
+.opts label{display:flex;align-items:center;gap:7px;font-size:.92rem;cursor:pointer}
+.opts input{accent-color:var(--accent);width:16px;height:16px}
+#list-title{max-width:420px}
+.fmt{display:flex;flex-wrap:wrap;gap:6px}
+.fmt .btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+#preview-html{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--paper);max-height:430px;overflow:auto;overflow-wrap:anywhere}
+#preview-text{width:100%;height:330px;font:13px/1.5 ui-monospace,"SF Mono",Menlo,Consolas,monospace;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--paper)}
+#export-status{color:var(--accent);font-weight:600}
+.prose{max-width:68ch}
+.prose h3{font:600 1.05rem/1.3 var(--font-ui);margin:20px 0 4px}
+.prose p{margin:0 0 10px}
 </style>
 </head>
 <body>
-<header><div class="in">
-<h1>Reciprocal Knowledge Library</h1>
-<p>The writing of Jeff Kisling, 2015 to today: channels into knowledge, reciprocity and extraction, and what happened between Quakers and Indigenous peoples. New writing appears at <a href="https://channelsintoknowledge.com/">Channels Into Knowledge</a>.</p>
+<header class="top"><div class="wrap brand">
+  <div>
+    <h1>Reciprocal Knowledge Library</h1>
+    <p>The writing of Jeff Kisling, 2015 to today: channels into knowledge, reciprocity and extraction, and what happened between Quakers and Indigenous peoples. New writing appears at <a href="https://channelsintoknowledge.com/">Channels Into Knowledge</a>.</p>
+  </div>
+  <div class="stats" id="stats"></div>
 </div></header>
-<div class="wrap">
-<nav id="nav" aria-label="Sections"></nav>
-<main id="main"><p>Loading the library…</p></main>
-</div>
+<nav class="tabs" aria-label="Sections"><div class="wrap tablist" role="tablist">
+  <button class="tab" role="tab" id="tab-search" aria-selected="true">Search</button>
+  <button class="tab" role="tab" id="tab-export" aria-selected="false" tabindex="-1">Selected &amp; export <span class="count-pill" id="sel-count">0</span></button>
+  <button class="tab" role="tab" id="tab-about" aria-selected="false" tabindex="-1">About</button>
+</div></nav>
+<main class="wrap" id="main"><p>Loading the library&hellip;</p></main>
 <script>
 (function(){
 "use strict";
-var C=null, S={sec:"",q:"",blog:"",age:"",full:false,shown:40}, TEXT={}, PAGE=40;
+var C=null, TEXT={}, PAGE=40, VIEW="search";
+var S={sec:"",q:"",blog:"",age:"",full:false,shown:PAGE};
+var SEL=[], FMT="html", KEY="rk-export-v1";
+var COLORS=["#c98a6b","#6b9ac9","#8fb07a","#b58cc4","#d4b25e","#6fb8b0","#5f8a7d","#c47a8e"];
 var $=function(id){return document.getElementById(id);};
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
-function ageLabel(p){return p.ag<0?"":p.ag===0?"All ages":"Ages "+p.ag+"+";}
+function num(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");}
+function ageLabel(p){return p.ag<0?"Not rated":p.ag===0?"All ages":"Ages "+p.ag+"+";}
 function chunkKey(p){var a=p.p.split("/");return a[0]+"-"+a[1];}
+function blogColor(i){return COLORS[i%COLORS.length];}
+
+try{ SEL=JSON.parse(localStorage.getItem(KEY)||"[]")||[]; }catch(e){ SEL=[]; }
+function saveSel(){ try{ localStorage.setItem(KEY,JSON.stringify(SEL)); }catch(e){} }
+function picked(path){ return SEL.indexOf(path)>=0; }
+function pick(path,on){ var i=SEL.indexOf(path); if(on&&i<0) SEL.push(path); if(!on&&i>=0) SEL.splice(i,1); saveSel(); syncCount(); }
+function selPosts(){ var by={}; C.posts.forEach(function(p){by[p.p]=p;});
+  return SEL.map(function(x){return by[x];}).filter(Boolean).sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;}); }
+function syncCount(){ $("sel-count").textContent=SEL.length; }
 
 function loadChunk(key){
   if(TEXT[key]) return Promise.resolve(TEXT[key]);
@@ -78,7 +189,25 @@ function loadChunk(key){
   return fetch("text-"+key+".json").then(function(r){return r.ok?r.json():null;}).then(function(j){TEXT[key]=j||{};return j;}).catch(function(){return null;});
 }
 
-/* ---- small markdown renderer: text is escaped first, so nothing in a post runs as HTML ---- */
+/* ---------- search terms: all words must appear, "a phrase", -minus ---------- */
+function parseQuery(q){
+  var pos=[], neg=[], re=/"([^"]+)"|(\S+)/g, m;
+  while((m=re.exec(q))){
+    var t=(m[1]||m[2]).toLowerCase(), out=false;
+    if(!m[1]&&t.charAt(0)==="-"){ out=true; t=t.slice(1); }
+    if(!t) continue;
+    (out?neg:pos).push(t);
+  }
+  return {pos:pos,neg:neg};
+}
+function rxEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+function highlight(text,terms){
+  var h=esc(text); if(!terms.length) return h;
+  try{ h=h.replace(new RegExp("("+terms.map(rxEsc).join("|")+")","gi"),"<mark>$1</mark>"); }catch(e){}
+  return h;
+}
+
+/* ---------- markdown for the reader (escaped first, so posts can't inject HTML) ---------- */
 function inline(s){
   s=esc(s);
   s=s.replace(/!\[([^\]]*)\]\(([^)\s]+)[^)]*\)/g,function(m,a,u){return /^https?:/.test(u)?'<img loading="lazy" alt="'+a+'" src="'+u+'">':"";});
@@ -94,7 +223,7 @@ function md(src){
   while(i<lines.length){
     var l=lines[i], m;
     if(/^\s*$/.test(l)){ flush(); i++; continue; }
-    if((m=/^(#{1,6})\s+(.*)$/.exec(l))){ flush(); var h=Math.min(6,m[1].length+1); out.push("<h"+h+">"+inline(m[2])+"</h"+h+">"); i++; continue; }
+    if((m=/^(#{1,6})\s+(.*)$/.exec(l))){ flush(); var hh=Math.min(6,m[1].length+1); out.push("<h"+hh+">"+inline(m[2])+"</h"+hh+">"); i++; continue; }
     if(/^\s*([-*_])\s*\1\s*\1[\s\-*_]*$/.test(l)){ flush(); out.push("<hr>"); i++; continue; }
     if(/^\[\^[^\]]+\]:/.test(l)){ flush(); i++; continue; }
     if(/^>/.test(l)){ flush(); var q=[]; while(i<lines.length && /^>/.test(lines[i])){ q.push(lines[i].replace(/^>\s?/,"")); i++; } out.push("<blockquote>"+md(q.join("\n"))+"</blockquote>"); continue; }
@@ -107,89 +236,174 @@ function md(src){
   flush(); return out.join("\n");
 }
 
-/* ---- state in the address bar ---- */
+/* ---------- the address bar holds the view ---------- */
 function readHash(){
   var h=decodeURIComponent(location.hash.replace(/^#/,"")), o={};
   h.split("&").forEach(function(kv){var i=kv.indexOf("="); if(i>0) o[kv.slice(0,i)]=kv.slice(i+1);});
   return o;
 }
-function setHash(o){
-  var parts=[]; for(var k in o) if(o[k]) parts.push(k+"="+encodeURIComponent(o[k]));
-  location.hash=parts.join("&");
+function searchHash(push){
+  var parts=[]; if(S.sec) parts.push("s="+S.sec); if(S.q) parts.push("q="+encodeURIComponent(S.q));
+  if(S.blog) parts.push("b="+S.blog); if(S.age) parts.push("a="+S.age); if(S.full) parts.push("f=1");
+  var h="#"+parts.join("&");
+  if(push) location.hash=h; else history.replaceState(null,"",h||"#");
 }
-function listHash(){ setHash({s:S.sec,q:S.q,b:S.blog,a:S.age,f:S.full?"1":""}); }
 
-/* ---- navigation ---- */
-function drawNav(){
-  var counts=C.sections.map(function(){return 0;});
-  C.posts.forEach(function(p){p.c.forEach(function(i){counts[i]++;});});
-  var h='<button data-s="" aria-current="'+(S.sec===""?"true":"false")+'"><span>All posts</span><span class="n">'+C.posts.length+'</span></button><h2>Sections</h2>', parent=null;
-  C.sections.forEach(function(s,i){
-    if(s.parent && s.parent!==parent){ h+="<h2>"+esc(s.parent)+"</h2>"; }
-    if(!s.parent && parent){ h+="<h2>&nbsp;</h2>"; }
-    parent=s.parent;
-    h+='<div class="'+(s.parent?"sub":"")+'"><button data-s="'+s.id+'" aria-current="'+(S.sec===s.id?"true":"false")+'"><span>'+esc(s.title)+'</span><span class="n">'+counts[i]+"</span></button></div>";
-  });
-  $("nav").innerHTML=h;
-}
-$("nav").addEventListener("click",function(e){
-  var b=e.target.closest("button"); if(!b) return;
-  S.sec=b.getAttribute("data-s"); S.shown=PAGE; listHash();
-});
-
-/* ---- list ---- */
+/* ---------- matching ---------- */
 function matches(){
-  var terms=S.q.toLowerCase().split(/\s+/).filter(Boolean), si=-1;
+  var Q=parseQuery(S.q), si=-1;
   C.sections.forEach(function(s,i){ if(s.id===S.sec) si=i; });
-  return C.posts.filter(function(p){
+  var res=C.posts.filter(function(p){
     if(si>=0 && p.c.indexOf(si)<0) return false;
     if(S.blog!=="" && p.b!==+S.blog) return false;
     if(S.age!=="" && !(p.ag>=0 && p.ag<=+S.age)) return false;
-    if(!terms.length) return true;
+    if(!Q.pos.length && !Q.neg.length) return true;
     if(!p._h) p._h=(p.t+" "+p.s+" "+p.g.join(" ")).toLowerCase();
-    var body=""; if(S.full){ var c=TEXT[chunkKey(p)]; body=c&&c[p.p]?(p._b||(p._b=c[p.p].toLowerCase())):""; }
-    return terms.every(function(t){ return p._h.indexOf(t)>=0 || (body && body.indexOf(t)>=0); });
+    var body=""; if(S.full){ var c=TEXT[chunkKey(p)]; if(c&&c[p.p]) body=p._b||(p._b=c[p.p].toLowerCase()); }
+    var hay=p._h+" "+body;
+    for(var i=0;i<Q.neg.length;i++) if(hay.indexOf(Q.neg[i])>=0) return false;
+    for(var j=0;j<Q.pos.length;j++) if(hay.indexOf(Q.pos[j])<0) return false;
+    return true;
   });
-}
-function drawList(){
-  var sec=null; C.sections.forEach(function(s){ if(s.id===S.sec) sec=s; });
-  var res=matches(), h='<div class="bar"><input type="search" id="q" placeholder="Search titles, summaries and tags" value="'+esc(S.q)+'" aria-label="Search">';
-  h+='<select id="blog" aria-label="Blog"><option value="">All eight blogs</option>'+C.blogs.map(function(b,i){return '<option value="'+i+'"'+(S.blog===String(i)?" selected":"")+">"+esc(b.name)+"</option>";}).join("")+"</select>";
-  h+='<select id="age" aria-label="Age"><option value="">Any age rating</option>'+[[0,"Rated for all ages"],[12,"Rated for ages 12 and up, or younger"],[14,"Rated for ages 14 and up, or younger"],[16,"Rated for ages 16 and up, or younger"]].map(function(a){return '<option value="'+a[0]+'"'+(S.age===String(a[0])?" selected":"")+">"+a[1]+"</option>";}).join("")+"</select>";
-  h+='<label><input type="checkbox" id="full"'+(S.full?" checked":"")+(C.text.length?"":" disabled")+"> Search the full text too</label></div>";
-  h+='<div class="about"><h2>'+esc(sec?sec.title:"All posts")+"</h2><p>"+esc(sec?sec.about:"Every post from eight blogs, newest first. Choose a section on the left, or search.")+"</p></div>";
-  h+='<p class="count" id="count">'+res.length+" post"+(res.length===1?"":"s")+"</p><ul class=\"posts\">";
-  res.slice(0,S.shown).forEach(function(p){
-    h+='<li><a class="t" href="#p='+encodeURIComponent(p.p)+'">'+esc(p.t)+'</a><div class="meta">'+p.d+" · "+esc(C.blogs[p.b].name)+"</div>";
-    if(p.s) h+='<p class="sum">'+esc(p.s)+"</p>";
-    var a=ageLabel(p); if(a) h+='<span class="chip">'+a+"</span>";
-    p.th.forEach(function(t){h+='<span class="chip w">'+esc(t)+"</span>";});
-    h+="</li>";
-  });
-  h+="</ul>"; if(res.length>S.shown) h+='<button class="more" id="more">Show more</button>';
-  $("main").innerHTML=h;
-  var q=$("q"), timer;
-  q.addEventListener("input",function(){ clearTimeout(timer); timer=setTimeout(function(){ S.q=q.value; S.shown=PAGE; history.replaceState(null,"","#"+["s="+S.sec,"q="+encodeURIComponent(S.q),"b="+S.blog,"a="+S.age,"f="+(S.full?"1":"")].join("&")); var pos=q.selectionStart; drawList(); $("q").focus(); try{$("q").setSelectionRange(pos,pos);}catch(e){} },250); });
-  $("blog").addEventListener("change",function(e){S.blog=e.target.value;S.shown=PAGE;listHash();});
-  $("age").addEventListener("change",function(e){S.age=e.target.value;S.shown=PAGE;listHash();});
-  $("full").addEventListener("change",function(e){
-    S.full=e.target.checked; if(!S.full){ listHash(); return; }
-    $("count").textContent="Loading the full text of every post…";
-    Promise.all(C.text.map(loadChunk)).then(function(){ listHash(); drawList(); });
-  });
-  if($("more")) $("more").addEventListener("click",function(){S.shown+=PAGE;drawList();});
+  res._terms=Q.pos;
+  return res;
 }
 
-/* ---- reader ---- */
+/* ---------- tabs ---------- */
+function setTab(v){
+  VIEW=v;
+  ["search","export","about"].forEach(function(k){
+    var b=$("tab-"+k), on=(k===v);
+    b.setAttribute("aria-selected",on?"true":"false"); b.tabIndex=on?0:-1;
+  });
+}
+$("tab-search").addEventListener("click",function(){ searchHash(true); if(location.hash===""||location.hash==="#") route(); });
+$("tab-export").addEventListener("click",function(){ location.hash="#t=export"; });
+$("tab-about").addEventListener("click",function(){ location.hash="#t=about"; });
+
+/* ---------- search panel ---------- */
+function sectionList(){
+  var counts=C.sections.map(function(){return 0;});
+  C.posts.forEach(function(p){p.c.forEach(function(i){counts[i]++;});});
+  var h='<button class="check" data-s="" aria-current="'+(S.sec===""?"true":"false")+'"><span>All posts</span><span class="n">'+num(C.posts.length)+"</span></button>", parent=null;
+  C.sections.forEach(function(s,i){
+    if(s.parent&&s.parent!==parent) h+='<div class="subhead">'+esc(s.parent)+"</div>";
+    parent=s.parent;
+    h+='<button class="check'+(s.parent?" sub":"")+'" data-s="'+s.id+'" aria-current="'+(S.sec===s.id?"true":"false")+'"><span>'+esc(s.title)+'</span><span class="n">'+num(counts[i])+"</span></button>";
+  });
+  return h;
+}
+function drawSearch(){
+  var h='<form class="searchbar" id="search-form" role="search">'
+   +'<label class="sr" for="q" hidden>Search the posts</label>'
+   +'<input class="input" id="q" type="search" autocomplete="off" placeholder="Search titles, summaries and tags, for example: reciprocity &quot;boarding school&quot; -Gaza" value="'+esc(S.q)+'">'
+   +'<button class="btn primary" type="submit">Search</button></form>'
+   +'<p class="hint search-hint">Words must all appear. Put a phrase in quotes. Put a minus sign before a word to leave it out.</p>'
+   +'<div class="search-grid"><aside class="filters" aria-label="Filters"><details id="fd" open><summary>Filters</summary><div class="filters-body">'
+   +'<div class="field"><span class="label">Section</span><div class="seclist" id="seclist">'+sectionList()+"</div></div>"
+   +'<div class="field"><label class="label" for="blog">Blog</label><select class="select" id="blog"><option value="">All eight blogs</option>'
+   +C.blogs.map(function(b,i){return '<option value="'+i+'"'+(S.blog===String(i)?" selected":"")+">"+esc(b.name)+"</option>";}).join("")+"</select></div>"
+   +'<div class="field"><label class="label" for="age">Age rating</label><select class="select" id="age"><option value="">Any age rating</option>'
+   +[[0,"Rated for all ages"],[12,"Ages 12 and up, or younger"],[14,"Ages 14 and up, or younger"],[16,"Ages 16 and up, or younger"]]
+      .map(function(a){return '<option value="'+a[0]+'"'+(S.age===String(a[0])?" selected":"")+">"+a[1]+"</option>";}).join("")+"</select></div>"
+   +'<label class="check"><input type="checkbox" id="full"'+(S.full?" checked":"")+(C.text.length?"":" disabled")+"> Search the full text too</label>"
+   +'<button class="btn" id="reset" type="button">Reset filters</button>'
+   +'</div></details></aside><div>'
+   +'<div class="toolbar"><span class="summary" id="count"></span><span class="row">'
+   +'<button class="btn" id="pick-all" type="button">Select these</button>'
+   +'<button class="btn" id="pick-none" type="button">Clear selection</button></span></div>'
+   +'<p class="lede" id="about-sec"></p><div class="results" id="results"></div><div class="pager" id="pager"></div></div></div>';
+  $("main").innerHTML=h;
+
+  var timer;
+  $("q").addEventListener("input",function(){ clearTimeout(timer); var v=this.value;
+    timer=setTimeout(function(){ S.q=v; S.shown=PAGE; searchHash(false); renderResults(); },250); });
+  $("search-form").addEventListener("submit",function(e){ e.preventDefault(); clearTimeout(timer);
+    S.q=$("q").value; S.shown=PAGE; searchHash(false); renderResults(); });
+  $("seclist").addEventListener("click",function(e){ var b=e.target.closest("button[data-s]"); if(!b) return;
+    S.sec=b.getAttribute("data-s"); S.shown=PAGE;
+    Array.prototype.forEach.call(this.querySelectorAll("button[data-s]"),function(x){x.setAttribute("aria-current",x===b?"true":"false");});
+    searchHash(false); renderResults(); });
+  $("blog").addEventListener("change",function(){ S.blog=this.value; S.shown=PAGE; searchHash(false); renderResults(); });
+  $("age").addEventListener("change",function(){ S.age=this.value; S.shown=PAGE; searchHash(false); renderResults(); });
+  $("full").addEventListener("change",function(){
+    S.full=this.checked; if(!S.full){ searchHash(false); renderResults(); return; }
+    $("count").textContent="Loading the full text of every post…";
+    Promise.all(C.text.map(loadChunk)).then(function(){ searchHash(false); renderResults(); });
+  });
+  $("reset").addEventListener("click",function(){
+    S.sec=""; S.q=""; S.blog=""; S.age=""; S.shown=PAGE;
+    $("q").value=""; $("blog").value=""; $("age").value="";
+    Array.prototype.forEach.call($("seclist").querySelectorAll("button[data-s]"),function(x){x.setAttribute("aria-current",x.getAttribute("data-s")===""?"true":"false");});
+    searchHash(false); renderResults(); });
+  $("results").addEventListener("change",function(e){
+    var b=e.target; if(b.type!=="checkbox"||!b.hasAttribute("data-sel")) return;
+    pick(b.getAttribute("data-sel"),b.checked);
+    var card=b.closest(".result"); if(card) card.classList.toggle("is-selected",b.checked);
+    syncPickButtons();
+  });
+  $("results").addEventListener("click",function(e){
+    var t=e.target.closest("button[data-tag]"); if(t){ S.q='"'+t.getAttribute("data-tag")+'"'; $("q").value=S.q; S.shown=PAGE; searchHash(false); renderResults(); return; }
+    var sc=e.target.closest("button[data-sec]"); if(sc){ S.sec=sc.getAttribute("data-sec"); S.shown=PAGE;
+      Array.prototype.forEach.call($("seclist").querySelectorAll("button[data-s]"),function(x){x.setAttribute("aria-current",x.getAttribute("data-s")===S.sec?"true":"false");});
+      searchHash(false); renderResults(); window.scrollTo(0,0); }
+  });
+  $("pick-all").addEventListener("click",function(){ matches().forEach(function(p){pick(p.p,true);}); renderResults(); });
+  $("pick-none").addEventListener("click",function(){ SEL=[]; saveSel(); syncCount(); renderResults(); });
+  renderResults();
+}
+function syncPickButtons(){
+  var n=SEL.length, c=$("pick-none"); if(!c) return;
+  c.textContent=n?"Clear "+num(n)+" selected":"Clear selection"; c.disabled=!n;
+}
+function renderResults(){
+  var sec=null; C.sections.forEach(function(s){ if(s.id===S.sec) sec=s; });
+  var res=matches(), terms=res._terms||[], slice=res.slice(0,S.shown);
+  $("count").innerHTML=res.length?"<b>"+num(res.length)+"</b> post"+(res.length===1?"":"s")+(res.length>slice.length?", showing "+num(slice.length):""):"No posts match";
+  $("about-sec").textContent=sec?sec.about:"Every post from eight blogs, newest first. Choose a section, or search.";
+  $("pick-all").textContent="Select these "+num(res.length);
+  $("pick-all").disabled=!res.length;
+  syncPickButtons();
+  var html="";
+  slice.forEach(function(p){
+    var sel=picked(p.p);
+    html+='<article class="result'+(sel?" is-selected":"")+'">'
+      +'<div class="pick"><input type="checkbox" data-sel="'+esc(p.p)+'"'+(sel?" checked":"")+' aria-label="Select for export: '+esc(p.t)+'"></div>'
+      +'<div style="min-width:0"><h3><a href="#p='+encodeURIComponent(p.p)+'">'+highlight(p.t,terms)+"</a></h3>"
+      +'<div class="meta"><span class="blog-tag"><span class="dot" style="background:'+blogColor(p.b)+'"></span>'+esc(C.blogs[p.b].name)+"</span>"
+      +"<span>"+p.d+"</span>"
+      +'<span class="agebadge'+(p.ag<0?" none":"")+'">'+ageLabel(p)+"</span></div></div>"
+      +(p.s?'<p class="sum">'+highlight(p.s,terms)+"</p>":'<p class="sum empty">No summary.</p>')
+      +(p.th.length?'<div class="themes">This post includes: '+esc(p.th.join(", "))+"</div>":"")
+      +'<div class="tags">'
+      +p.c.map(function(i){return '<button type="button" class="tagbtn sec" data-sec="'+C.sections[i].id+'">'+esc(C.sections[i].title)+"</button>";}).join("")
+      +p.g.slice(0,10).map(function(g){return '<button type="button" class="tagbtn" data-tag="'+esc(g)+'">'+esc(g)+"</button>";}).join("")
+      +"</div></article>";
+  });
+  $("results").innerHTML=html||'<div class="empty-state"><p><b>No posts match these filters.</b></p><p>Try fewer words, another spelling, another section, or all eight blogs.</p></div>';
+  $("pager").innerHTML=res.length>slice.length?'<button class="btn" id="more" type="button">Show '+num(Math.min(PAGE,res.length-slice.length))+" more</button>":"";
+  if($("more")) $("more").addEventListener("click",function(){ S.shown+=PAGE; renderResults(); });
+}
+
+/* ---------- reader ---------- */
 function drawPost(path){
   var p=null; C.posts.forEach(function(x){ if(x.p===path) p=x; });
-  if(!p){ $("main").innerHTML="<p>That post is not in the library.</p>"; return; }
-  var head='<p><button class="back" id="back">← Back to the list</button></p><article><div class="meta">'+p.d+" · "+esc(C.blogs[p.b].name)+(p.u?' · <a href="'+esc(p.u)+'" target="_blank" rel="noopener">Original post</a>':"")+"</div><h1>"+esc(p.t)+"</h1>";
-  var chips=p.c.map(function(i){return '<a class="chip" href="#s='+C.sections[i].id+'">'+esc(C.sections[i].title)+"</a>";}).join("")+p.g.map(function(g){return '<span class="chip">'+esc(g)+"</span>";}).join("");
-  if(ageLabel(p)) chips='<span class="chip">'+ageLabel(p)+"</span>"+chips;
-  if(p.th.length) head+='<div class="note">This post includes: '+esc(p.th.join(", "))+".</div>";
-  $("main").innerHTML=head+'<div class="body" id="body"><p>Loading…</p></div><p>'+chips+"</p></article>";
-  $("back").addEventListener("click",function(){ if(history.length>1) history.back(); else listHash(); });
+  if(!p){ $("main").innerHTML='<div class="empty-state">That post is not in the library.</div>'; return; }
+  var h='<p class="row"><button class="btn" id="back" type="button">&larr; Back to the list</button>'
+    +'<button class="btn'+(picked(p.p)?"":" primary")+'" id="pick-one" type="button">'+(picked(p.p)?"Remove from export list":"Add to export list")+"</button></p>"
+    +'<article class="post"><div class="meta"><span class="blog-tag"><span class="dot" style="background:'+blogColor(p.b)+'"></span>'+esc(C.blogs[p.b].name)+"</span><span>"+p.d+"</span>"
+    +'<span class="agebadge'+(p.ag<0?" none":"")+'">'+ageLabel(p)+"</span>"
+    +(p.u?'<span><a href="'+esc(p.u)+'" target="_blank" rel="noopener">Original post</a></span>':"")+"</div>"
+    +"<h1>"+esc(p.t)+"</h1>";
+  if(p.th.length) h+='<div class="note">This post includes: '+esc(p.th.join(", "))+".</div>";
+  h+='<div class="body" id="body"><p>Loading…</p></div><div class="tags" style="margin-top:18px">'
+    +p.c.map(function(i){return '<a class="tagbtn sec" href="#s='+C.sections[i].id+'">'+esc(C.sections[i].title)+"</a>";}).join("")
+    +p.g.map(function(g){return '<span class="tagbtn">'+esc(g)+"</span>";}).join("")+"</div></article>";
+  $("main").innerHTML=h;
+  $("back").addEventListener("click",function(){ if(history.length>1) history.back(); else searchHash(true); });
+  $("pick-one").addEventListener("click",function(){ pick(p.p,!picked(p.p));
+    this.textContent=picked(p.p)?"Remove from export list":"Add to export list";
+    this.classList.toggle("primary",!picked(p.p)); });
   window.scrollTo(0,0);
   loadChunk(chunkKey(p)).then(function(c){
     var body=c&&c[p.p];
@@ -202,16 +416,184 @@ function drawPost(path){
   });
 }
 
+/* ---------- Selected & export ---------- */
+function opts(){ var g=function(id){return $(id).checked;};
+  return {sum:g("opt-summary"),meta:g("opt-meta"),tags:g("opt-tags"),sec:g("opt-sections"),age:g("opt-age"),num:g("opt-num"),
+          title:$("list-title").value.trim()||"Reading list"}; }
+function today(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function mdEsc(s){ return String(s).replace(/([\[\]])/g,"\\$1"); }
+function csvCell(s){ s=String(s==null?"":s); return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; }
+function secNames(p){ return p.c.map(function(i){return C.sections[i].title;}).join(", "); }
+function buildExport(fmt){
+  var o=opts(), list=selPosts(), n=list.length;
+  var note="Exported "+today()+" from the Reciprocal Knowledge Library, the writing of Jeff Kisling. "+n+" "+(n===1?"post":"posts")+".";
+  if(fmt==="csv"){
+    var head=["Title","URL"]; if(o.meta) head.push("Blog","Date"); if(o.age) head.push("Age rating","Themes");
+    if(o.sec) head.push("Sections"); if(o.tags) head.push("Tags"); if(o.sum) head.push("Summary");
+    var rows=[head.join(",")];
+    list.forEach(function(p){
+      var r=['=HYPERLINK("'+String(p.u).replace(/"/g,"%22")+'","'+String(p.t).slice(0,250).replace(/"/g,'""')+'")',p.u];
+      if(o.meta) r.push(C.blogs[p.b].name,p.d);
+      if(o.age) r.push(ageLabel(p),(p.th||[]).join("; "));
+      if(o.sec) r.push(secNames(p)); if(o.tags) r.push((p.g||[]).join("; ")); if(o.sum) r.push(p.s||"");
+      rows.push(r.map(csvCell).join(","));
+    });
+    return rows.join("\n");
+  }
+  if(fmt==="md"){
+    var m="# "+o.title+"\n\n_"+note+"_\n\n";
+    list.forEach(function(p,i){
+      var bullet=o.num?(i+1)+". ":"- ", pad=o.num?"   ":"  ";
+      m+=bullet+"["+mdEsc(p.t)+"]("+p.u+")";
+      if(o.meta) m+=" | "+C.blogs[p.b].name+", "+p.d;
+      if(o.age) m+=" | "+ageLabel(p)+(p.th&&p.th.length?" (includes: "+p.th.join(", ")+")":"");
+      m+="\n"+pad+"<"+p.u+">\n";
+      if(o.sum&&p.s) m+=pad+p.s+"\n";
+      if(o.sec&&p.c.length) m+=pad+"Sections: "+secNames(p)+"\n";
+      if(o.tags&&p.g.length) m+=pad+"Tags: "+p.g.join(", ")+"\n";
+      m+="\n";
+    });
+    return m.trim()+"\n";
+  }
+  if(fmt==="txt"){
+    var t=o.title+"\n"+note+"\n\n";
+    list.forEach(function(p,i){
+      t+=(o.num?(i+1)+". ":"")+p.t+"\n";
+      if(o.meta) t+=C.blogs[p.b].name+", "+p.d+"\n";
+      if(o.age) t+=ageLabel(p)+(p.th&&p.th.length?". Includes: "+p.th.join(", "):"")+"\n";
+      t+=p.u+"\n";
+      if(o.sum&&p.s) t+=p.s+"\n";
+      if(o.sec&&p.c.length) t+="Sections: "+secNames(p)+"\n";
+      if(o.tags&&p.g.length) t+="Tags: "+p.g.join(", ")+"\n";
+      t+="\n";
+    });
+    return t.trim()+"\n";
+  }
+  var tag=o.num?"ol":"ul", h="<h2>"+esc(o.title)+"</h2>\n<p><em>"+esc(note)+"</em></p>\n<"+tag+">\n";
+  list.forEach(function(p){
+    h+='<li><a href="'+esc(p.u)+'">'+esc(p.t)+"</a>";
+    if(o.meta) h+=" ("+esc(C.blogs[p.b].name)+", "+p.d+")";
+    if(o.age) h+=" <strong>"+esc(ageLabel(p))+"</strong>"+(p.th&&p.th.length?' <span style="font-size:90%">(includes: '+esc(p.th.join(", "))+")</span>":"");
+    h+='<br><a href="'+esc(p.u)+'" style="font-size:90%">'+esc(p.u)+"</a>";
+    if(o.sum&&p.s) h+="<p>"+esc(p.s)+"</p>";
+    if(o.sec&&p.c.length) h+='<p style="font-size:90%">Sections: '+esc(secNames(p))+"</p>";
+    if(o.tags&&p.g.length) h+='<p style="font-size:90%">Tags: '+esc(p.g.join(", "))+"</p>";
+    h+="</li>\n";
+  });
+  return h+"</"+tag+">\n";
+}
+function flash(msg){ var el=$("export-status"); el.textContent=msg; clearTimeout(el._t); el._t=setTimeout(function(){el.textContent="";},4000); }
+function renderExport(){
+  var has=SEL.length>0, out=has?buildExport(FMT):"";
+  $("copy").disabled=!has; $("download").disabled=!has;
+  if(FMT==="html"){ $("preview-html").hidden=false; $("preview-text").hidden=true;
+    $("preview-html").innerHTML=has?out.replace(/<a /g,'<a target="_blank" rel="noopener" '):'<p style="color:var(--ink-3)">Your export will appear here.</p>'; }
+  else { $("preview-html").hidden=true; $("preview-text").hidden=false; $("preview-text").value=out; }
+}
+function copyExport(){
+  var out=buildExport(FMT);
+  if(FMT==="html"){
+    var plain=buildExport("txt");
+    if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){
+      navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([out],{type:"text/html"}),"text/plain":new Blob([plain],{type:"text/plain"})})])
+        .then(function(){flash("Copied with working links. Paste it into an email or document.");},selectRendered);
+    } else selectRendered();
+    return;
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(out).then(function(){flash("Copied.");},copyTextarea);
+  else copyTextarea();
+}
+function copyTextarea(){ var ta=$("preview-text"); ta.focus(); ta.select(); var ok=false; try{ok=document.execCommand("copy");}catch(e){}
+  flash(ok?"Copied.":"Press Ctrl+C or Cmd+C to copy the selected text."); }
+function selectRendered(){ var r=document.createRange(); r.selectNodeContents($("preview-html"));
+  var sl=window.getSelection(); sl.removeAllRanges(); sl.addRange(r); var ok=false; try{ok=document.execCommand("copy");}catch(e){}
+  if(ok){ sl.removeAllRanges(); flash("Copied with working links. Paste it into an email or document."); }
+  else flash("Press Ctrl+C or Cmd+C to copy the selected list."); }
+function downloadExport(){
+  var map={html:["html","text/html"],md:["md","text/markdown"],txt:["txt","text/plain"],csv:["csv","text/csv"]}[FMT];
+  var body=buildExport(FMT);
+  if(FMT==="html") body='<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>'+esc(opts().title)+'</title></head>\n<body style="font-family:Arial,Helvetica,sans-serif;max-width:760px;margin:2em auto;padding:0 1em;line-height:1.5">\n'+body+"</body></html>\n";
+  var name=(opts().title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"reading-list")+"."+map[0];
+  try{
+    var url=URL.createObjectURL(new Blob([body],{type:map[1]+";charset=utf-8"}));
+    var a=document.createElement("a"); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},2000);
+    flash("Downloading "+name+". If nothing downloads, use Copy instead.");
+  }catch(e){ flash("This browser could not save the file. Use Copy instead."); }
+}
+function drawExport(){
+  var list=selPosts();
+  var h='<h2 class="ph">Selected &amp; export</h2><p class="lede">Posts you tick anywhere in the library collect here. Export the list as a reading list to paste into an email or document, or as a spreadsheet.</p>';
+  h+='<div class="card"><h3>'+num(list.length)+" selected</h3>";
+  h+=list.length?'<ul class="picked">'+list.map(function(p){
+       return '<li><span><a href="#p='+encodeURIComponent(p.p)+'">'+esc(p.t)+'</a> <span class="meta" style="display:inline-flex">'+p.d+" · "+esc(C.blogs[p.b].name)+'</span></span><button class="x" data-drop="'+esc(p.p)+'" aria-label="Remove '+esc(p.t)+'">&times;</button></li>';
+     }).join("")+"</ul>":'<p class="hint">Nothing selected yet. Tick the box beside a post on the Search tab, or open a post and use &ldquo;Add to export list&rdquo;.</p>';
+  if(list.length) h+='<p style="margin:12px 0 0"><button class="btn" id="clear-all" type="button">Clear the list</button></p>';
+  h+="</div>";
+  h+='<div class="card"><h3>The list</h3><div class="field"><label class="label" for="list-title">Title</label>'
+   +'<input class="input" id="list-title" value="Reading list"></div><div class="opts">'
+   +[["opt-summary","Summaries",1],["opt-meta","Blog and date",1],["opt-sections","Sections",0],["opt-tags","Tags",0],["opt-age","Age rating",0],["opt-num","Number the list",0]]
+      .map(function(o){return '<label><input type="checkbox" id="'+o[0]+'"'+(o[2]?" checked":"")+"> "+o[1]+"</label>";}).join("")
+   +"</div></div>";
+  h+='<div class="card"><h3>Format</h3><div class="fmt">'
+   +[["html","Rich text (for email)"],["md","Markdown"],["txt","Plain text"],["csv","Spreadsheet (CSV)"]]
+      .map(function(f){return '<button class="btn" type="button" data-fmt="'+f[0]+'" aria-pressed="'+(FMT===f[0]?"true":"false")+'">'+f[1]+"</button>";}).join("")
+   +'</div><p class="row" style="margin:14px 0"><button class="btn primary" id="copy" type="button">Copy</button>'
+   +'<button class="btn" id="download" type="button">Download</button><span id="export-status"></span></p>'
+   +'<div id="preview-html"></div><textarea id="preview-text" readonly hidden aria-label="Export preview"></textarea></div>';
+  $("main").innerHTML=h;
+  var ul=$("main").querySelector("ul.picked");
+  if(ul) ul.addEventListener("click",function(e){ var b=e.target.closest("button[data-drop]"); if(!b) return;
+    pick(b.getAttribute("data-drop"),false); drawExport(); });
+  if($("clear-all")) $("clear-all").addEventListener("click",function(){ SEL=[]; saveSel(); syncCount(); drawExport(); });
+  $("main").querySelector(".fmt").addEventListener("click",function(e){ var b=e.target.closest("button[data-fmt]"); if(!b) return;
+    FMT=b.getAttribute("data-fmt");
+    Array.prototype.forEach.call(this.children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+    renderExport(); });
+  $("list-title").addEventListener("input",renderExport);
+  $("main").querySelector(".opts").addEventListener("change",renderExport);
+  $("copy").addEventListener("click",copyExport);
+  $("download").addEventListener("click",downloadExport);
+  renderExport();
+  window.scrollTo(0,0);
+}
+
+/* ---------- About ---------- */
+function drawAbout(){
+  var counts=C.sections.map(function(){return 0;});
+  C.posts.forEach(function(p){p.c.forEach(function(i){counts[i]++;});});
+  $("main").innerHTML='<h2 class="ph">About this library</h2><div class="prose">'
+   +"<p>This is the writing of Jeff Kisling, gathered in one place: "+num(C.posts.length)+" posts from eight blogs, 2015 to today. The words in every post are his, as published. New writing appears at <a href=\"https://channelsintoknowledge.com/\">Channels Into Knowledge</a> and is added here each week.</p>"
+   +"<h3>How it is organized</h3>"
+   +"<p>A channel into knowledge is this: some knowledge can only be acquired by direct experience with someone who holds that knowledge and is extending an invitation to learn it. The sections follow that idea and the work it has led to.</p>"
+   +"<ul>"+C.sections.map(function(s,i){return "<li><strong>"+esc(s.title)+"</strong> — "+esc(s.about.split(". ")[0])+". "+num(counts[i])+" posts.</li>";}).join("")+"</ul>"
+   +"<h3>What was made by a machine</h3>"
+   +"<p>The posts themselves are Jeff's. The summaries beneath each title, the section descriptions, and the filing of posts into sections were made by software from the words of each post, as finding aids. They are not his words, and a post may be filed under a section it only touches. The age ratings are a guide for adults choosing material for young people, not a substitute for reading a post first.</p>"
+   +"<h3>Older language</h3>"
+   +"<p>Posts keep the words Jeff used when he wrote them. His current writing uses <em>reciprocity</em> and <em>extraction</em>, and <em>active objection</em>.</p>"
+   +'<h3>Elsewhere</h3><p><a href="https://channelsintoknowledge.com/">Channels Into Knowledge</a> · <a href="https://kislingjeff-oss.github.io/JAKPublicBlogDatabase/desk/#search">Journal Research Desk</a></p>'
+   +"<p class=\"hint\">Catalog built "+esc(C.generated)+".</p></div>";
+  window.scrollTo(0,0);
+}
+
+/* ---------- routing ---------- */
 function route(){
   var h=readHash();
-  if(h.p){ drawNav(); drawPost(h.p); return; }
+  if(h.p){ setTab("search"); drawPost(h.p); return; }
+  if(h.t==="export"){ setTab("export"); drawExport(); return; }
+  if(h.t==="about"){ setTab("about"); drawAbout(); return; }
   S.sec=h.s||""; S.q=h.q||""; S.blog=h.b||""; S.age=h.a||""; S.full=h.f==="1"&&Object.keys(TEXT).length>0;
-  drawNav(); drawList();
+  setTab("search"); drawSearch();
 }
 fetch("catalog.json").then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){
-  C=j; if(!C.text) C.text=[]; window.addEventListener("hashchange",route); route();
+  C=j; if(!C.text) C.text=[];
+  $("stats").innerHTML='<div class="stat"><b>'+num(C.posts.length)+"</b><span>posts</span></div>"
+    +'<div class="stat"><b>'+C.blogs.length+"</b><span>blogs</span></div>"
+    +'<div class="stat"><b>'+C.sections.length+"</b><span>sections</span></div>";
+  syncCount();
+  window.addEventListener("hashchange",route); route();
 }).catch(function(){
-  $("main").innerHTML='<div class="note"><strong>The library could not load its catalog.</strong> If you opened this page straight from a folder on your computer, the browser blocks it from reading the files beside it. Open the published site instead, or search the bundle in Obsidian.</div>';
+  $("main").innerHTML='<div class="empty-state"><p><b>The library could not load its catalog.</b></p><p>If you opened this page straight from a folder on your computer, the browser blocks it from reading the files beside it. Open the published site instead, or search the bundle in Obsidian.</p></div>';
 });
 })();
 </script>
