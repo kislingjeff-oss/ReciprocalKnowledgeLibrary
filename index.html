@@ -36,18 +36,30 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid #7fb3a5;outline-offset:2px;border-radius:4px}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,3vw,32px)}
 
-header.top{background:var(--card);border-bottom:1px solid var(--line)}
-.brand{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-block:22px 14px}
-.brand h1{margin:0;font:600 clamp(1.5rem,3vw,2rem)/1.15 var(--font-ui);letter-spacing:-.01em;text-wrap:balance}
-.brand p{margin:4px 0 0;color:var(--ink-2);font-size:.95rem;max-width:68ch}
+header.top{background:var(--card)}
+.sticky-top{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.brand{padding-block:20px 12px}
+.brand-row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px}
+.brand h1{margin:0;font:600 clamp(1.4rem,3vw,2rem)/1.15 var(--font-ui);letter-spacing:-.01em;text-wrap:balance}
+.brand p{margin:6px 0 0;color:var(--ink-2);font-size:.95rem;max-width:none}
+/* tighten the header once the page is scrolled, so the sticky bar stays small */
+.sticky-top.scrolled .brand{padding-block:9px 7px}
+.sticky-top.scrolled .brand p{display:none}
+.sticky-top.scrolled .brand h1{font-size:1.1rem}
+.sticky-top.scrolled .stat b{font-size:.95rem}
+.sticky-top.scrolled .stat span{display:none}
+.sticky-top.scrolled .stat{display:flex;align-items:baseline;gap:5px}
+.sticky-top.scrolled .stat::after{content:attr(data-label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.brand,.tablist,.stat b,.stat span{transition:all .12s ease-out}
 .stats{display:flex;gap:18px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
 .stat b{display:block;font:600 1.15rem/1.1 var(--font-ui)}
 .stat span{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 
-nav.tabs{overflow:hidden;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--card);border-bottom:1px solid var(--line)}
+nav.tabs{overflow:hidden;background:var(--card);border-top:1px solid var(--line)}
 .tablist{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;max-width:100%}
 .tablist::-webkit-scrollbar{display:none}
 .tab{appearance:none;border:0;background:none;padding:12px 14px 11px;font-weight:600;color:var(--ink-2);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px;flex:none}
+a.tab{text-decoration:none}
 .tab:hover{color:var(--accent)}
 .tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
 .count-pill{min-width:22px;padding:1px 7px;border-radius:999px;background:var(--mist);color:var(--ink-2);font-size:.75rem;font-variant-numeric:tabular-nums;text-align:center}
@@ -71,13 +83,22 @@ h2.ph{font:600 1.35rem/1.2 var(--font-ui);margin:0 0 4px}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-.search-grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
-@media (max-width:860px){.search-grid{grid-template-columns:minmax(0,1fr)}}
+.search-grid{display:grid;grid-template-columns:minmax(440px,38%) minmax(0,1fr);gap:24px;align-items:start}
+/* Below this width the panel moves above the results, still in columns, so it never needs its own scrollbar. */
+@media (max-width:1100px){.search-grid{grid-template-columns:minmax(0,1fr)}.filters{position:static!important}}
 .filters{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px}
-.filters-body{display:grid;gap:12px}
+/* two columns inside the panel, so the whole of it is visible at once */
+.filters-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;align-items:start}
+@media (max-width:620px){.filters-body{grid-template-columns:minmax(0,1fr)}}
+.fcol{display:grid;gap:10px;align-content:start;min-width:0}
+.filters .check{padding:3px 7px;font-size:.87rem;line-height:1.3}
+.filters .seclist .n{font-size:.75rem}
+.filters .subhead{margin:5px 0 0 7px}
 .filters summary{display:none}
 @media (max-width:860px){.filters{padding:0}.filters summary{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-weight:600;cursor:pointer;list-style:none}.filters summary::-webkit-details-marker{display:none}.filters summary::after{content:"Show";color:var(--accent);font-size:.88rem}.filters details[open] summary::after{content:"Hide"}.filters-body{padding:0 16px 16px}}
-@media (min-width:861px){.filters{position:sticky;top:64px;max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}}
+@media (min-width:1101px){.filters{position:sticky;top:calc(var(--top,150px) + 12px)}}
+/* only on a window too short for the panel does it scroll, so nothing is unreachable */
+@media (min-width:1101px) and (max-height:700px){.filters{max-height:calc(100dvh - var(--top,150px) - 28px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}}
 .field{display:grid;gap:6px}
 .label{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px}
 .btn.tiny{padding:1px 7px;font-size:.7rem;letter-spacing:.04em;border-radius:6px;margin-left:auto}
@@ -151,18 +172,21 @@ ul.picked .x{border:0;background:none;color:var(--accent);cursor:pointer;font-si
 </style>
 </head>
 <body>
+<div class="sticky-top" id="sticky-top">
 <header class="top"><div class="wrap brand">
-  <div>
+  <div class="brand-row">
     <h1>Reciprocal Knowledge Library</h1>
-    <p>The writing of Jeff Kisling, 2015 to today: channels into knowledge, reciprocity and extraction, and what happened between Quakers and Indigenous peoples. New writing appears at <a href="https://channelsintoknowledge.com/">Channels Into Knowledge</a>.</p>
+    <div class="stats" id="stats"></div>
   </div>
-  <div class="stats" id="stats"></div>
+  <p id="subtitle">The writing of Jeff Kisling, 2015 to today: channels into knowledge, reciprocity and extraction, and what happened between Quakers and Indigenous peoples. New writing appears at <a href="https://channelsintoknowledge.com/">Channels Into Knowledge</a>.</p>
 </div></header>
 <nav class="tabs" aria-label="Sections"><div class="wrap tablist" role="tablist">
+  <a class="tab" href="start-here.html">Start here</a>
   <button class="tab" role="tab" id="tab-search" aria-selected="true">Search</button>
   <button class="tab" role="tab" id="tab-export" aria-selected="false" tabindex="-1">Selected &amp; export <span class="count-pill" id="sel-count">0</span></button>
   <button class="tab" role="tab" id="tab-about" aria-selected="false" tabindex="-1">About</button>
 </div></nav>
+</div>
 <main class="wrap" id="main"><p>Loading the library&hellip;</p></main>
 <script>
 (function(){
@@ -317,14 +341,14 @@ function drawSearch(){
    +'<button class="btn primary" type="submit">Search</button></form>'
    +'<p class="hint search-hint">Words must all appear. Put a phrase in quotes. Put a minus sign before a word to leave it out.</p>'
    +'<div class="search-grid"><aside class="filters" aria-label="Filters"><details id="fd" open><summary>Filters</summary><div class="filters-body">'
-   +'<div class="field"><span class="label">Section</span><div class="seclist" id="seclist">'+sectionList()+"</div></div>"
-   +'<div class="field"><span class="label">Blogs to search<button class="btn ghost tiny" id="blog-all" type="button">All</button><button class="btn ghost tiny" id="blog-none" type="button">None</button></span>'
+   +'<div class="fcol"><div class="field"><span class="label">Section</span><div class="seclist" id="seclist">'+sectionList()+"</div></div></div>"
+   +'<div class="fcol"><div class="field"><span class="label">Blogs to search<button class="btn ghost tiny" id="blog-all" type="button">All</button><button class="btn ghost tiny" id="blog-none" type="button">None</button></span>'
    +'<div class="seclist" id="bloglist">'+blogList()+"</div></div>"
    +'<div class="field"><label class="label" for="age">Age rating</label><select class="select" id="age"><option value="">Any age rating</option>'
    +[[0,"Rated for all ages"],[12,"Ages 12 and up, or younger"],[14,"Ages 14 and up, or younger"],[16,"Ages 16 and up, or younger"]]
       .map(function(a){return '<option value="'+a[0]+'"'+(S.age===String(a[0])?" selected":"")+">"+a[1]+"</option>";}).join("")+"</select></div>"
    +'<label class="check"><input type="checkbox" id="full"'+(S.full?" checked":"")+(C.text.length?"":" disabled")+"> Search the full text too</label>"
-   +'<button class="btn" id="reset" type="button">Reset filters</button>'
+   +'<button class="btn" id="reset" type="button">Reset filters</button></div>'
    +'</div></details></aside><div>'
    +'<div class="toolbar"><span class="summary" id="count"></span><span class="row">'
    +'<button class="btn" id="pick-all" type="button">Select these</button>'
@@ -609,11 +633,33 @@ function route(){
   if(S.blogs.length===C.blogs.length) S.blogs=[]; S.full=h.f==="1"&&Object.keys(TEXT).length>0;
   setTab("search"); drawSearch();
 }
+function measureTop(){
+  var el=$("sticky-top");
+  document.documentElement.style.setProperty("--top",el.getBoundingClientRect().height+"px");
+}
+(function stickyHeader(){
+  var el=$("sticky-top"), ticking=false;
+  function onScroll(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){
+      var want=window.scrollY>90;
+      if(want!==el.classList.contains("scrolled")){
+        el.classList.toggle("scrolled",want);
+        measureTop(); setTimeout(measureTop,180);   /* again once the size transition has finished */
+      }
+      ticking=false;
+    });
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});
+  window.addEventListener("resize",measureTop);
+  measureTop();
+})();
 fetch("catalog.json").then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){
   C=j; if(!C.text) C.text=[];
-  $("stats").innerHTML='<div class="stat"><b>'+num(C.posts.length)+"</b><span>posts</span></div>"
-    +'<div class="stat"><b>'+C.blogs.length+"</b><span>blogs</span></div>"
-    +'<div class="stat"><b>'+C.sections.length+"</b><span>sections</span></div>";
+  $("stats").innerHTML='<div class="stat" data-label="posts"><b>'+num(C.posts.length)+"</b><span>posts</span></div>"
+    +'<div class="stat" data-label="blogs"><b>'+C.blogs.length+"</b><span>blogs</span></div>"
+    +'<div class="stat" data-label="sections"><b>'+C.sections.length+"</b><span>sections</span></div>";
+  measureTop();
   syncCount();
   window.addEventListener("hashchange",route); route();
 }).catch(function(){
