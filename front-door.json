@@ -1,0 +1,112 @@
+{
+  "note": "Starting points for the Start here page. Each theme lists the sections it covers and the posts shown first, by their path in catalog.json. Chosen by software from titles and summaries on 2026-11-12; edit the lists freely. A path that is not in the catalog is skipped.",
+  "themes": [
+    {
+      "id": "channels",
+      "title": "Channels into knowledge",
+      "sections": [
+        "ch"
+      ],
+      "start": [
+        "channels-into-knowledge/2026/2026-08-24-what-is-a-channel.md",
+        "channels-into-knowledge/2026/2026-08-08-how-knowledge-travels.md",
+        "channels-into-knowledge/2026/2026-08-09-knowledge-withheld-versus-missing.md",
+        "channels-into-knowledge/2026/2026-08-18-why-is-it-necessary-to-study-this-at-all.md",
+        "active-objection/2026/2026-06-05-the-throughlines.md"
+      ]
+    },
+    {
+      "id": "reciprocity",
+      "title": "Reciprocity and extraction",
+      "sections": [
+        "rx"
+      ],
+      "start": [
+        "landback-friends/2022/2022-01-07-mutual-aid-is-the-quaker-way-of-being-in-the-world.md",
+        "unflinching/2024/2024-05-01-quaker-practice-and-mutual-aid.md",
+        "channels-into-knowledge/2026/2026-09-29-colonizing-space.md",
+        "quakers-social-justice-and-revolution/2021/2021-01-24-unlearning-capitalism-2.md",
+        "quakers-and-mutual-aid/2023/2023-03-07-an-alternative-to-capitalist-hierarchies.md"
+      ]
+    },
+    {
+      "id": "quakers-indigenous",
+      "title": "Quakers and Indigenous peoples",
+      "sections": [
+        "bs",
+        "ld",
+        "sl",
+        "nt"
+      ],
+      "start": [
+        "active-objection/2026/2026-06-19-scattergood-and-the-hub.md",
+        "active-objection/2026/2026-06-15-why-didnt-i-know.md",
+        "landback-friends/2021/2021-06-29-some-quaker-history-regarding-residential-schools.md",
+        "quakers-social-justice-and-revolution/2021/2021-05-15-one-quakers-response-to-landback.md",
+        "channels-into-knowledge/2026/2026-09-23-stolen-land.md",
+        "quakers-and-mutual-aid/2022/2022-04-20-quaker-slavery-and-manumissions.md"
+      ],
+      "about": "Boarding schools, land, slavery, and why it was not taught."
+    },
+    {
+      "id": "building",
+      "title": "Building channels",
+      "sections": [
+        "um",
+        "gp",
+        "dr",
+        "ma"
+      ],
+      "start": [
+        "first-nation-farmer-unity/2020/2020-04-04-first-nation-farmer-climate-unity-march-an-introduction.md",
+        "channels-into-knowledge/2026/2026-08-08-why-tell-the-story-of-the-march.md",
+        "quakers-and-mutual-aid/2022/2022-12-08-great-plains-action-society-and-midwest-quakers.md",
+        "active-objection/2026/2026-06-21-introduction-to-the-hub.md",
+        "landback-friends/2024/2024-04-03-decolonial-repair-network.md",
+        "quakers-social-justice-and-revolution/2020/2020-12-23-my-mutual-aid-journey-thus-far.md"
+      ],
+      "about": "The Unity March, Great Plains Action Society, the Decolonial Repair Network, and mutual aid."
+    },
+    {
+      "id": "active-objection",
+      "title": "Active objection",
+      "sections": [
+        "ao"
+      ],
+      "start": [
+        "active-objection/2026/2026-06-07-what-does-active-objection-mean.md",
+        "active-objection/2026/2026-05-01-active-objection-for-a-new-generation.md",
+        "quakers-social-justice-and-revolution/2017/2017-11-14-scattergood-journal-returning-my-draft-card.md",
+        "active-objection/2026/2026-06-09-what-was-the-real-story-behind-my.md",
+        "new-conscientious-objector/2025/2025-10-30-introduction-to-new-conscience-objector-newco.md"
+      ]
+    },
+    {
+      "id": "quaker-knowledge",
+      "title": "The pool of Quaker knowledge",
+      "sections": [
+        "qk"
+      ],
+      "start": [
+        "channels-into-knowledge/2026/2026-08-29-my-journal-and-leadings-for-young-friends-today.md",
+        "unflinching/2024/2024-10-06-peace-testimony-today.md",
+        "unflinching/2024/2024-12-29-led-by-faith.md",
+        "new-conscientious-objector/2026/2026-03-01-decolonized-peace-testimony.md",
+        "quakers-and-mutual-aid/2023/2023-09-27-advices-and-queries.md"
+      ]
+    },
+    {
+      "id": "young-friends",
+      "title": "For young Friends",
+      "sections": [
+        "yf"
+      ],
+      "start": [
+        "channels-into-knowledge/2026/2026-08-11-letters-to-a-friend-not-yet-born.md",
+        "channels-into-knowledge/2026/2026-08-08-scattergood-friends-school-throughlines.md",
+        "channels-into-knowledge/2026/2026-08-30-leadings-continued.md",
+        "quakers-social-justice-and-revolution/2021/2021-05-21-landback-and-indigenous-youth.md"
+      ]
+    }
+  ]
+}
