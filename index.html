@@ -33,6 +33,8 @@ if(location.hash.length<2) location.replace("start-here.html");
 }
 *{box-sizing:border-box}
 html,body{background:var(--paper);color:var(--ink)}
+/* The header changes height on scroll; the browser must not shift the scroll position to compensate. */
+html{overflow-anchor:none}
 body{margin:0;font:16px/1.55 var(--font-ui);-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-underline-offset:2px}
 a:hover{text-decoration-thickness:2px}
@@ -54,7 +56,6 @@ header.top{background:var(--card)}
 .sticky-top.scrolled .stat span{display:none}
 .sticky-top.scrolled .stat{display:flex;align-items:baseline;gap:5px}
 .sticky-top.scrolled .stat::after{content:attr(data-label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.brand,.tablist,.stat b,.stat span{transition:all .12s ease-out}
 .stats{display:flex;gap:18px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
 .stat b{display:block;font:600 1.15rem/1.1 var(--font-ui)}
 .stat span{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
@@ -642,14 +643,18 @@ function measureTop(){
   document.documentElement.style.setProperty("--top",el.getBoundingClientRect().height+"px");
 }
 (function stickyHeader(){
-  var el=$("sticky-top"), ticking=false;
+  /* When the header shrinks, a margin of the same size takes its place, so the page below does not move
+     and the scroll position cannot bounce back across the threshold (which made the header flicker). */
+  var el=$("sticky-top"), ticking=false, full=0;
   function onScroll(){
     if(ticking) return; ticking=true;
     requestAnimationFrame(function(){
-      var want=window.scrollY>90;
-      if(want!==el.classList.contains("scrolled")){
+      var on=el.classList.contains("scrolled"), want=on?window.scrollY>40:window.scrollY>90;
+      if(want!==on){
+        if(want) full=el.offsetHeight;
         el.classList.toggle("scrolled",want);
-        measureTop(); setTimeout(measureTop,180);   /* again once the size transition has finished */
+        el.style.marginBottom=want?Math.max(0,full-el.offsetHeight)+"px":"";
+        measureTop();
       }
       ticking=false;
     });
